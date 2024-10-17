@@ -69,6 +69,7 @@ namespace GimnasioActividad
         {
             try
             {
+                cbCities.Text = "";
                 DataGridViewRow filaSeleccionada = dgvClient.Rows[e.RowIndex];
                 String id = filaSeleccionada.Cells[0].Value.ToString();
                 String nombre = filaSeleccionada.Cells[1].Value.ToString();
@@ -161,7 +162,7 @@ namespace GimnasioActividad
             name = tbName.Text;
             surname = tbSurname.Text;
             bornDate = DateTime.Parse(dtpBorn.Text);
-            city = cbCities.SelectedItem.ToString();
+            city = cbCities.Text.ToString();
             telf = Int32.Parse(tbPhone.Text);
             clearTextBoxes();
         }
@@ -184,18 +185,25 @@ namespace GimnasioActividad
 
         private void btnSaveJson_Click(object sender, EventArgs e)
         {
-            try
+
+            if (downloadJsonDialog.ShowDialog() == DialogResult.OK)
             {
-                String json = getJson();
-                File.WriteAllText("C:\\Users\\isaac\\Desktop\\clientes.json", json);
-                MessageBox.Show("El JSON se ha creado correctamente.", "Éxito");
-            } catch {
-                MessageBox.Show("Ha habido un error al crear el JSON.", "Error");
+                try
+                {
+                    String json = getJson();
+                    File.WriteAllText(downloadJsonDialog.SelectedPath + "/clientes.json", json);
+                    MessageBox.Show("El JSON se ha creado correctamente.", "Éxito");
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Ha habido un error al crear el JSON." + exc.ToString(), "Error");
+                }
             }
         }
 
         private void btnUploadJson_Click(object sender, EventArgs e)
         {
+            clientList.Clear();
             if (uploadJsonDialog.ShowDialog() == DialogResult.OK) {
                 String rutaFichero = uploadJsonDialog.FileName;
                 FileStream json = File.Open(rutaFichero, FileMode.Open);

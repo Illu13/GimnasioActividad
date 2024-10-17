@@ -57,6 +57,7 @@
             this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.uploadJsonDialog = new System.Windows.Forms.OpenFileDialog();
+            this.downloadJsonDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
@@ -358,5 +359,6 @@
         private System.Windows.Forms.ComboBox cbCities;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.OpenFileDialog uploadJsonDialog;
+        private System.Windows.Forms.FolderBrowserDialog downloadJsonDialog;
     }
 }
